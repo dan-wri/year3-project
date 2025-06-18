@@ -30,6 +30,7 @@ app.add_middleware(
 
 memory_db = {"fruits": []}
 
+
 @app.get("/fruits", response_model=Fruits)
 def get_fruits():
     return Fruits(fruits=memory_db["fruits"])
