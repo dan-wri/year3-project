@@ -11,7 +11,7 @@ class Challenge(Base):
     __tablename__ = 'challenges'
 
     id = Column(Integer, primary_key=True)
-    diffuculty = Column(String, nullable=False)
+    difficulty = Column(String, nullable=False)
     date_created = Column(DateTime, default=datetime.now)
     created_by = Column(String, nullable=False)
     title = Column(String, nullable=False)

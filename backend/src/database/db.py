@@ -31,7 +31,7 @@ def reset_quota_if_needed(db: Session,  quota: models.ChallengeQuota):
 
 def create_challenge(
     db: Session,
-    diffuculty: str,
+    difficulty: str,
     created_by: str,
     title: str,
     options: str,
@@ -39,7 +39,7 @@ def create_challenge(
     explanation: str
 ):
     db_challenge = models.Challenge(
-        diffuculty=diffuculty,
+        difficulty=difficulty,
         created_by=created_by,
         title=title,
         options=options,
