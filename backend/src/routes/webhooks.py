@@ -1,6 +1,6 @@
 from fastapi import APIRouter, Request, HTTPException, Depends
 from ..database.db import create_challenge_quota
-from ..database.models import get_db
+from ..database.models import get_db, ChallengeQuota, Challenge
 from svix.webhooks import Webhook
 import os
 import json
@@ -25,15 +25,29 @@ async def handle_user_created(request: Request, db=Depends(get_db)):
         wh.verify(payload, headers)
 
         data = json.loads(payload)
-
-        if data.get("type") != "user.created":
-            return {"status": "ignored"}
-
+        event_type = data.get("type")
         user_data = data.get("data", {})
         user_id = user_data.get("id")
 
-        create_challenge_quota(db, user_id)
+        if event_type == "user.created":
+            create_challenge_quota(db, user_id)
+
+        elif event_type == "user.deleted":
+            quota = db.query(ChallengeQuota).filter_by(user_id=user_id).first()
+            if quota:
+                db.delete(quota)
+
+            challenges = db.query(Challenge).filter_by(
+                created_by=user_id).all()
+            for challenge in challenges:
+                db.delete(challenge)
+
+            db.commit()
+
+        else:
+            return {"status": "ignored"}
 
         return {"status": "success"}
+
     except Exception as e:
         raise HTTPException(status_code=401, detail=str(e))
