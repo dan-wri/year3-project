@@ -101,3 +101,32 @@ def generate_challenge_with_ai(difficulty: str) -> Dict[str, Any]:
     except Exception as e:
         print(f"Error generating challenge with AI: {e}")
         return random.choice(PLACEHOLDER_CHALLENGES)
+
+
+def improve_text_with_ai(text: str) -> str:
+    """
+    Uses OpenAI to rewrite the given text in more fluent, clear, and professional English.
+    """
+    system_prompt = """You are a professional editor.
+    Your job is to improve the user's text.
+    Make it clearer, more fluent, and more professional,
+    but do not change its meaning.
+    Return only the improved text, no explanations or extra formatting.
+    """
+
+    try:
+        response = client.chat.completions.create(
+            model="gpt-3.5-turbo-0125",
+            messages=[
+                {"role": "system", "content": system_prompt},
+                {"role": "user", "content": text}
+            ],
+            temperature=0.4
+        )
+
+        improved_text = response.choices[0].message.content.strip()
+        return improved_text
+
+    except Exception as e:
+        print(f"Error improving text with AI: {e}")
+        return "Could not improve text."

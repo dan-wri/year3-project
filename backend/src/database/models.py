@@ -29,6 +29,16 @@ class ChallengeQuota(Base):
     last_reset_date = Column(DateTime, default=datetime.now)
 
 
+class Rewrite(Base):
+    __tablename__ = 'rewrites'
+
+    id = Column(Integer, primary_key=True)
+    original_text = Column(String, nullable=False)
+    improved_text = Column(String, nullable=False)
+    date_created = Column(DateTime, default=datetime.now)
+    created_by = Column(String, nullable=False)
+
+
 Base.metadata.create_all(engine)
 
 SessionLocal = sessionmaker(autocommit=False, autoflush=False, bind=engine)

@@ -6,9 +6,10 @@ export function Layout(){
     return <div className="app-layout">
         <header className="app-header">
             <div className="header-content">
-                <h1>Code Challenge Generator</h1>
+                <h1>FutureSpace AI</h1>
                 <nav>
                     <SignedIn>
+                        <Link to="/write">Pro Writer</Link>
                         <Link to="/">Generate Challenge</Link>
                         <Link to="/history">Histroy</Link>
                         <UserButton/>

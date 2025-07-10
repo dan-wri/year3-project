@@ -3,6 +3,7 @@ import {Routes, Route} from "react-router-dom"
 import {Layout} from "./layout/Layout.jsx"
 import {ChallengeGenerator} from "./challenge/ChallengeGenerator.jsx"
 import {HistoryPanel} from "./history/HistoryPanel.jsx"
+import {ProWriter} from "./write/ProWriter.jsx"
 import {AuthenticationPage} from "./auth/AuthenticationPage.jsx"
 import './App.css'
 
@@ -14,6 +15,7 @@ function App() {
       <Route element={<Layout/>}>
         <Route path="/" element={<ChallengeGenerator />}/>
         <Route path="/history" element={<HistoryPanel />}/>
+        <Route path="/write" element={<ProWriter />}/>
       </Route>
     </Routes>
   </ClerkProviderWithRoutes>

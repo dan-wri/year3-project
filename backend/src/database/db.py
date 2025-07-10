@@ -54,3 +54,19 @@ def create_challenge(
 
 def get_user_challenges(db: Session, user_id: str):
     return db.query(models.Challenge).filter(models.Challenge.created_by == user_id).all()
+
+
+def create_rewrite(db: Session, original_text: str, improved_text: str, created_by: str):
+    db_rewrite = models.Rewrite(
+        original_text=original_text,
+        improved_text=improved_text,
+        created_by=created_by
+    )
+    db.add(db_rewrite)
+    db.commit()
+    db.refresh(db_rewrite)
+    return db_rewrite
+
+
+def get_user_rewrites(db: Session, user_id: str):
+    return db.query(models.Rewrite).filter(models.Rewrite.created_by == user_id).all()
