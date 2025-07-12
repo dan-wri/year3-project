@@ -52,35 +52,57 @@ export function ProWriter() {
 
     return (
         <div className="text-rephraser-container">
-        <h2>Rewrite Your Text</h2>
+            <h2>Rewrite Your Text</h2>
 
-        <div className="quota-display">
-            <p>AI requests remaining today: {quota?.quota_remaining || 0}</p>
-            {quota?.quota_remaining === 0 && (
+            <div className="quota-display">
+                <p>AI requests remaining today: {quota?.quota_remaining || 0}</p>
+                {quota?.quota_remaining === 0 && (
                 <p>Next reset: {getNextResetTime()?.toLocaleString()}</p>
-            )}
-        </div>
-
-        <textarea
-            placeholder="Type your text here..."
-            value={inputText}
-            onChange={(e) => setInputText(e.target.value)}
-            rows={6}
-            disabled={isLoading}
-        />
-        <button onClick={handleRewrite} disabled={isLoading} className="generate-button">
-            {isLoading ? "Rewriting..." : "Rewrite Text"}
-        </button>
-
-        {error && <div className="error-message">{error}</div>}
-
-        {rewrittenText && (
-            <div className="rewritten-text-output">
-            <h3>Rewritten Text:</h3>
-            <p>{rewrittenText}</p>
+                )}
             </div>
-        )}
+
+            <div className="rephraser-flex">
+                <div className="rephraser-box">
+                <textarea
+                    placeholder="Type your text here..."
+                    value={inputText}
+                    onChange={(e) => setInputText(e.target.value)}
+                    rows={10}
+                    maxLength={1500}
+                    disabled={isLoading}
+                />
+                </div>
+
+                <button
+                    onClick={handleRewrite}
+                    disabled={isLoading}
+                    className="rephraser-arrow"
+                    style={{ background: "none", border: "none", cursor: "pointer", fontSize: "2rem" }}
+                >
+                    ➡️
+                </button>
+
+                <div className="rephraser-box">
+                    {error && <div className="error-message">{error}</div>}
+                    <textarea
+                        value={error ? `Error: ${error}` : rewrittenText || ""}
+                        placeholder={isLoading ? "Rewriting..." : "Your rewritten text will appear here..."}
+                        readOnly
+                        rows={10}
+                    />
+                </div>
+            </div>
+
+            <button
+                onClick={handleRewrite}
+                disabled={isLoading}
+                className="generate-button"
+                style={{ marginTop: "1rem" }}
+            >
+                {isLoading ? "Rewriting..." : "Rewrite Text"}
+            </button>
         </div>
+
     );
 
 }

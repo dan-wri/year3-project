@@ -1,30 +1,39 @@
 import "react"
 import {SignedIn, SignedOut, UserButton} from "@clerk/clerk-react"
 import {Outlet, Link, Navigate} from "react-router-dom"
+import {useState} from "react"
 
 export function Layout(){
-    return <div className="app-layout">
-        <header className="app-header">
-            <div className="header-content">
-                <h1>FutureSpace AI</h1>
-                <nav>
-                    <SignedIn>
-                        <Link to="/write">Pro Writer</Link>
-                        <Link to="/">Generate Challenge</Link>
-                        <Link to="/history">Histroy</Link>
-                        <UserButton/>
-                    </SignedIn>
-                </nav>
-            </div>
-        </header>
+    const [showHistoryDropdown, setShowHistoryDropdown] = useState(false)
 
-        <main className="app-main">
-            <SignedOut>
-                <Navigate to="/sign-in" replace/>
-            </SignedOut>
-            <SignedIn>
-                <Outlet />
-            </SignedIn>
-        </main>
-    </div>
+    const toggleDropdown = () => {
+        setShowHistoryDropdown(!showHistoryDropdown)
+    }
+
+    return (
+        <div className="app-layout">
+            <header className="app-header">
+                <div className="header-content">
+                    <h1>FutureSpace AI</h1>
+                    <nav>
+                        <SignedIn>
+                            <Link to="/write">Pro Writer</Link>
+                            <Link to="/">Generate Challenge</Link>
+                            <Link to="/history">Histroy</Link>
+                            <UserButton/>
+                        </SignedIn>
+                    </nav>
+                </div>
+            </header>
+
+            <main className="app-main">
+                <SignedOut>
+                    <Navigate to="/sign-in" replace/>
+                </SignedOut>
+                <SignedIn>
+                    <Outlet />
+                </SignedIn>
+            </main>
+        </div>
+    )
 }
