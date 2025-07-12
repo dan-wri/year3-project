@@ -49,10 +49,28 @@ export function WriteHistory() {
                 <div className="history-list">
                     {history.map((rewrite) => (
                         <div key={rewrite.id} className="history-item">
-                            <h4>Original:</h4>
-                            <p>{rewrite.original_text}</p>
-                            <h4>Improved:</h4>
-                            <p>{rewrite.improved_text}</p>
+                            <div className="rewrite-block">
+                                <div className="rewrite-section">
+                                    <h4>Original:</h4>
+                                    <div className="rephraser-box">
+                                        <textarea
+                                        value={rewrite.original_text}
+                                        readOnly
+                                        rows={10}
+                                        />
+                                    </div>
+                                </div>
+                                <div className="rewrite-section">
+                                    <h4>Improved:</h4>
+                                    <div className="rephraser-box">
+                                        <textarea
+                                        value={rewrite.improved_text}
+                                        readOnly
+                                        rows={10}
+                                        />
+                                    </div>
+                                </div>
+                            </div>
                             <p className="timestamp">
                                 {new Date(rewrite.date_created).toLocaleString()}
                             </p>
