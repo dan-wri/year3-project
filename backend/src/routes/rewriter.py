@@ -59,8 +59,8 @@ async def improve_text(request: ImproveTextRequest, request_obj: Request, db: Se
         raise HTTPException(status_code=400, detail=str(e))
 
 
-@router.get("/my-rewrites")
-async def my_rewrites(request: Request, db: Session = Depends(get_db)):
+@router.get("/write-history")
+async def write_history(request: Request, db: Session = Depends(get_db)):
     user_details = authenticate_and_get_user_details(request)
     user_id = user_details.get("user_id")
 

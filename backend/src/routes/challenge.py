@@ -64,8 +64,8 @@ async def generate_challenge(request: ChallengeRequest, request_obj: Request, db
         raise HTTPException(status_code=400, detail=str(e))
 
 
-@router.get("/my-history")
-async def my_history(request: Request, db: Session = Depends(get_db)):
+@router.get("/challenge-history")
+async def challenge_history(request: Request, db: Session = Depends(get_db)):
     user_details = authenticate_and_get_user_details(request)
     user_id = user_details.get("user_id")
 

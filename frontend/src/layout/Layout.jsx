@@ -6,10 +6,6 @@ import {useState} from "react"
 export function Layout(){
     const [showHistoryDropdown, setShowHistoryDropdown] = useState(false)
 
-    const toggleDropdown = () => {
-        setShowHistoryDropdown(!showHistoryDropdown)
-    }
-
     return (
         <div className="app-layout">
             <header className="app-header">
@@ -19,7 +15,25 @@ export function Layout(){
                         <SignedIn>
                             <Link to="/write">Pro Writer</Link>
                             <Link to="/">Generate Challenge</Link>
-                            <Link to="/history">Histroy</Link>
+                            <div 
+                                className="dropdown"
+                                onMouseEnter={() => setShowHistoryDropdown(true)}
+                                onMouseLeave={() => setShowHistoryDropdown(false)}
+                            >
+                                <button
+                                    className="dropdown-toggle"
+                                    style={showHistoryDropdown ? { color: 'grey', cursor: 'default', opacity: 0.6 } : {}}
+                                >
+                                    History ▾
+                                </button>
+
+                                {showHistoryDropdown && (
+                                    <div className="dropdown-menu">
+                                        <Link to="/challenge-history">Challenge History</Link>
+                                        <Link to="/write-history">Pro Writer History</Link>
+                                    </div>
+                                )}
+                            </div>
                             <UserButton/>
                         </SignedIn>
                     </nav>

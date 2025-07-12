@@ -55,7 +55,7 @@ export function ProWriter() {
             <h2>Rewrite Your Text</h2>
 
             <div className="quota-display">
-                <p>AI requests remaining today: {quota?.quota_remaining || 0}</p>
+                <p>AI prompts remaining today: {quota?.quota_remaining || 0}</p>
                 {quota?.quota_remaining === 0 && (
                 <p>Next reset: {getNextResetTime()?.toLocaleString()}</p>
                 )}

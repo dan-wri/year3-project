@@ -2,7 +2,8 @@ import ClerkProviderWithRoutes from "./auth/ClerkProviderWithRoutes.jsx"
 import {Routes, Route} from "react-router-dom"
 import {Layout} from "./layout/Layout.jsx"
 import {ChallengeGenerator} from "./challenge/ChallengeGenerator.jsx"
-import {HistoryPanel} from "./history/HistoryPanel.jsx"
+import {ChallengeHistory} from "./history/ChallengeHistory.jsx"
+import {WriteHistory} from "./history/WriteHistory.jsx"
 import {ProWriter} from "./write/ProWriter.jsx"
 import {AuthenticationPage} from "./auth/AuthenticationPage.jsx"
 import './App.css'
@@ -14,7 +15,8 @@ function App() {
       <Route path="/sign-up" element={<AuthenticationPage />} />
       <Route element={<Layout/>}>
         <Route path="/" element={<ChallengeGenerator />}/>
-        <Route path="/history" element={<HistoryPanel />}/>
+        <Route path="/challenge-history" element={<ChallengeHistory />}/>
+        <Route path="/write-history" element={<WriteHistory />}/>
         <Route path="/write" element={<ProWriter />}/>
       </Route>
     </Routes>
