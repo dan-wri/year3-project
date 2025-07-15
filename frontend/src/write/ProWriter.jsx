@@ -42,7 +42,7 @@ export function ProWriter() {
         try {
             const response = await makeRequest("improve-text", {
                 method: "POST",
-                body: JSON.stringify({ text: inputText }),
+                body: JSON.stringify({ text: inputText, type: selectedOption }),
             });
             setRewrittenText(response.improved_text);
             fetchQuota();
@@ -64,11 +64,19 @@ export function ProWriter() {
                 )}
             </div>
 
-            <Dropdown
-                options={["Cover Letter", "Email", "Text Rewriter"]}
-                selected={selectedOption}
-                onSelect={setSelectedOption}
-            />
+            <div className="dropdown-wrapper">
+                <Dropdown
+                    options={["Email", "Text Rewriter"]}
+                    selected={selectedOption}
+                    onSelect={setSelectedOption}
+                />
+
+                <p className="dropdown-description">
+                    {selectedOption === "Email"
+                        ? "Improve your email's clarity, tone, and professionalism."
+                        : "Rephrase any text to improve flow, grammar, or style."}
+                </p>
+            </div>
 
             <div className="rephraser-flex">
                 <div className="rephraser-box">

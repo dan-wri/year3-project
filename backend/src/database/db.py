@@ -56,11 +56,12 @@ def get_user_challenges(db: Session, user_id: str):
     return db.query(models.Challenge).filter(models.Challenge.created_by == user_id).all()
 
 
-def create_rewrite(db: Session, original_text: str, improved_text: str, created_by: str):
+def create_rewrite(db: Session, original_text: str, improved_text: str, created_by: str, rewrite_type: str):
     db_rewrite = models.Rewrite(
         original_text=original_text,
         improved_text=improved_text,
-        created_by=created_by
+        created_by=created_by,
+        type=rewrite_type
     )
     db.add(db_rewrite)
     db.commit()

@@ -35,6 +35,7 @@ class Rewrite(Base):
     id = Column(Integer, primary_key=True)
     original_text = Column(String, nullable=False)
     improved_text = Column(String, nullable=False)
+    type = Column(String, nullable=False)
     date_created = Column(DateTime, default=datetime.now)
     created_by = Column(String, nullable=False)
 

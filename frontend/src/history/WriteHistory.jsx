@@ -49,6 +49,7 @@ export function WriteHistory() {
                 <div className="history-list">
                     {history.map((rewrite) => (
                         <div key={rewrite.id} className="history-item">
+                            <h4>Type: {rewrite.type}</h4>
                             <div className="rewrite-block">
                                 <div className="rewrite-section">
                                     <h4>Original:</h4>

@@ -103,16 +103,19 @@ def generate_challenge_with_ai(difficulty: str) -> Dict[str, Any]:
         return random.choice(PLACEHOLDER_CHALLENGES)
 
 
-def improve_text_with_ai(text: str) -> str:
+def improve_text_with_ai(text: str, rewrite_type: str) -> str:
     """
-    Uses OpenAI to rewrite the given text in more fluent, clear, and professional English.
+    Uses OpenAI to rewrite text based on the type.
     """
-    system_prompt = """You are a professional editor.
-    Your job is to improve the user's text.
-    Make it clearer, more fluent, and more professional,
-    but do not change its meaning.
-    Return only the improved text, no explanations or extra formatting.
-    """
+    if rewrite_type == "Email":
+        system_prompt = """You are a professional email writer.
+        Rewrite the user's text as a clear, concise, professional business email.
+        Keep the meaning, but improve tone and structure."""
+    else:
+        system_prompt = """You are a professional editor.
+        Rewrite the text to be clearer, more fluent, and professional.
+        Do not change its meaning.
+        Return only the improved text."""
 
     try:
         response = client.chat.completions.create(
@@ -123,10 +126,7 @@ def improve_text_with_ai(text: str) -> str:
             ],
             temperature=0.4
         )
-
-        improved_text = response.choices[0].message.content.strip()
-        return improved_text
-
+        return response.choices[0].message.content.strip()
     except Exception as e:
         print(f"Error improving text with AI: {e}")
         return "Could not improve text."
