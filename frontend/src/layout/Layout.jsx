@@ -16,19 +16,19 @@ export function Layout(){
                             <Link to="/write">Pro Writer</Link>
                             <Link to="/">Generate Challenge</Link>
                             <div 
-                                className="dropdown"
+                                className="nav-dropdown"
                                 onMouseEnter={() => setShowHistoryDropdown(true)}
                                 onMouseLeave={() => setShowHistoryDropdown(false)}
                             >
                                 <button
-                                    className="dropdown-toggle"
+                                    className="nav-dropdown-toggle"
                                     style={showHistoryDropdown ? { color: 'grey', cursor: 'default', opacity: 0.6 } : {}}
                                 >
                                     History ▾
                                 </button>
 
                                 {showHistoryDropdown && (
-                                    <div className="dropdown-menu">
+                                    <div className="nav-dropdown-menu">
                                         <Link to="/challenge-history">Challenge History</Link>
                                         <Link to="/write-history">Pro Writer History</Link>
                                     </div>

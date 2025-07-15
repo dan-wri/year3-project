@@ -1,6 +1,7 @@
 import "react"
 import {useState, useEffect} from "react"
 import { useApi } from "../utils/api.js";
+import { Dropdown } from "../utils/Dropdown.jsx";
 
 export function ProWriter() {
     const [quota, setQuota] = useState(null)
@@ -9,6 +10,8 @@ export function ProWriter() {
     const [rewrittenText, setRewrittenText] = useState(null)
     const [isLoading, setIsLoading] = useState(false)
     const [error, setError] = useState(null);
+
+    const [selectedOption, setSelectedOption] = useState("Cover Letter");
 
     useEffect(() => {
         fetchQuota()
@@ -60,6 +63,12 @@ export function ProWriter() {
                 <p>Next reset: {getNextResetTime()?.toLocaleString()}</p>
                 )}
             </div>
+
+            <Dropdown
+                options={["Cover Letter", "Email", "Text Rewriter"]}
+                selected={selectedOption}
+                onSelect={setSelectedOption}
+            />
 
             <div className="rephraser-flex">
                 <div className="rephraser-box">
