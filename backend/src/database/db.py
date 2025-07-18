@@ -1,5 +1,5 @@
 from sqlalchemy.orm import Session
-from datetime import datetime, timedelta
+from datetime import datetime, timedelta, timezone
 from . import models
 
 # __init__.py file added to remove error above - Might need to be removed
@@ -20,7 +20,14 @@ def create_challenge_quota(db: Session, user_id: str):
 
 
 def reset_quota_if_needed(db: Session,  quota: models.ChallengeQuota):
-    now = datetime.now()
+    now = datetime.now(timezone.utc)
+
+    if quota.last_reset_date.tzinfo is None:
+        quota.last_reset_date = quota.last_reset_date.replace(
+            tzinfo=timezone.utc)
+    else:
+        quota.last_reset_date = quota.last_reset_date
+
     if now - quota.last_reset_date > timedelta(hours=24):
         quota.quota_remaining = 10
         quota.last_reset_date = now
