@@ -78,3 +78,29 @@ def create_rewrite(db: Session, original_text: str, improved_text: str, created_
 
 def get_user_rewrites(db: Session, user_id: str):
     return db.query(models.Rewrite).filter(models.Rewrite.created_by == user_id).all()
+
+
+def create_user_profile(db: Session, clerk_user_id: str):
+    profile = models.Profile(clerk_user_id=clerk_user_id)
+    db.add(profile)
+    db.commit()
+    db.refresh(profile)
+    return profile
+
+
+def get_user_profile(db: Session, clerk_user_id: str):
+    return db.query(models.Profile).filter_by(clerk_user_id=clerk_user_id).first()
+
+
+def update_user_profile(db: Session, clerk_user_id: str, updates: dict):
+    profile = get_user_profile(db, clerk_user_id)
+    if not profile:
+        return None
+
+    for key, value in updates.items():
+        if hasattr(profile, key) and value is not None:
+            setattr(profile, key, value)
+
+    db.commit()
+    db.refresh(profile)
+    return profile

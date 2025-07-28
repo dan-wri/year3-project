@@ -50,7 +50,6 @@ body {
 
 .header-content nav {
   display: flex;
-  gap: 1.5rem;
   align-items: center;
 }
 
@@ -59,10 +58,16 @@ body {
   text-decoration: none;
   font-weight: 500;
   transition: color 0.2s;
+  padding: 0 1rem;
+  border-right: 1px solid #d1d5db;
 }
 
 .header-content nav a:hover {
   color: var(--primary-color);
+}
+
+.header-user {
+  padding: 0 1rem;
 }
 
 .app-main {
@@ -521,6 +526,8 @@ body {
   font-weight: 500;
   cursor: pointer;
   font-size: 1rem;
+  padding: 0 1rem;
+  border-right: 1px solid #d1d5db;
 }
 
 .nav-dropdown-toggle:hover {

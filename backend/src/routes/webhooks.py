@@ -1,5 +1,5 @@
 from fastapi import APIRouter, Request, HTTPException, Depends
-from ..database.db import create_challenge_quota
+from ..database.db import create_challenge_quota, create_user_profile
 from ..database.models import get_db, ChallengeQuota, Challenge
 from svix.webhooks import Webhook
 import os
@@ -31,6 +31,7 @@ async def handle_user_created(request: Request, db=Depends(get_db)):
 
         if event_type == "user.created":
             create_challenge_quota(db, user_id)
+            create_user_profile(db, user_id)
 
         elif event_type == "user.deleted":
             quota = db.query(ChallengeQuota).filter_by(user_id=user_id).first()

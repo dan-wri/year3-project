@@ -34,7 +34,10 @@ export function Layout(){
                                     </div>
                                 )}
                             </div>
-                            <UserButton/>
+                            <Link to="/profile">My Profile</Link>
+                            <div className="header-user">
+                                <UserButton/>
+                            </div>
                         </SignedIn>
                     </nav>
                 </div>

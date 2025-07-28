@@ -6,6 +6,7 @@ import {ChallengeHistory} from "./history/ChallengeHistory.jsx"
 import {WriteHistory} from "./history/WriteHistory.jsx"
 import {ProWriter} from "./write/ProWriter.jsx"
 import {AuthenticationPage} from "./auth/AuthenticationPage.jsx"
+import { MyProfile } from "./profile/MyProfile.jsx"
 import './App.css'
 
 function App() {
@@ -18,6 +19,7 @@ function App() {
         <Route path="/challenge-history" element={<ChallengeHistory />}/>
         <Route path="/write-history" element={<WriteHistory />}/>
         <Route path="/write" element={<ProWriter />}/>
+        <Route path="/profile" element={<MyProfile />}/>
       </Route>
     </Routes>
   </ClerkProviderWithRoutes>
